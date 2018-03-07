@@ -2,7 +2,7 @@
 
 == Big Picture
 
-ifdef::env-github[image::diagram-classes.png[Diagram classes]]
+ifdef::env-github[image::diagrams/jw-universe-big-picture.png[John Wick Universe Big Picture]]
 ifndef::env-github[]
 [plantuml, diagrams/jw-universe-big-picture, png]
 ....
@@ -60,6 +60,8 @@ endif::env-github[]
 
 == Contracting Assassins
 
+ifdef::env-github[image::diagrams/contracting-assassins.png[Contracting Assassins]]
+ifndef::env-github[]
 [plantuml, diagrams/contracting-assassins, png]
 ....
 actor Family
@@ -95,6 +97,7 @@ alt target found
 end
 deactivate Assassin
 ....
+endif::env-github[]
 
 == References
 
