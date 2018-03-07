@@ -1,5 +1,58 @@
 = John Wick Universe
 
+[plantuml, diagrams/jw-universe-big-picture, png]
+....
+
+cloud "The Continental Hotel" as continental
+
+artifact "Gold Coin" as coin
+continental --> coin : issues
+
+interface "Hotel Service" as service
+service --> "1" coin : priced
+continental --> service : provides\nto assassins
+
+artifact "US Dollar" as usd
+coin -- usd : converts
+
+artifact Marker
+continental --> Marker : tracks
+
+artifact Contract
+continental --> Contract : tracks
+Contract -left-> usd : priced
+
+node "New York Branch" as nybranch
+continental *-- nybranch
+actor Winston
+Winston --> continental : owns
+
+node "Rome Branch" as romebranch
+continental *-- romebranch
+
+cloud "The High Table" as hightable
+
+node "Criminal Family Seat" as seat
+hightable *-- "12" seat
+
+actor Family
+Family -right-> seat : owns
+
+Actor "D'Antonio Family" as dantonio
+dantonio -up-^ Family
+
+actor Assassin
+continental --> "*" Assassin : hosts
+Assassin --> Contract : executes
+Assassin -up-> Marker : issues\nredeems
+
+actor "John Wick" as jw
+jw -up-^ Assassin
+
+Family --> Assassin : hires
+
+....
+
 == References
 
 - https://en.wikipedia.org/wiki/John_Wick_(film_series)[John Wick on Wikipedia]
