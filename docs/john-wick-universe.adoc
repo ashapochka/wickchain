@@ -1,5 +1,7 @@
 = John Wick Universe
 
+== Big Picture
+
 [plantuml, diagrams/jw-universe-big-picture, png]
 ....
 
@@ -51,6 +53,44 @@ jw -up-^ Assassin
 
 Family --> Assassin : hires
 
+....
+
+== Contracting Assassins
+
+[plantuml, diagrams/contracting-assassins, png]
+....
+actor Family
+control "The Continental Hotel" as Continental
+entity Contract
+actor Assassin
+actor Target
+activate Target
+
+Family -> Continental : place contract(target, price, location)
+activate Continental
+create Contract
+Continental -> Contract : register(target, price)
+activate Contract
+
+Continental -> Assassin : broadcast(contract, location)
+deactivate Continental
+activate Assassin
+
+Assassin -> Assassin : search(target)
+
+alt target found
+    Assassin -> Target : execute
+    alt target executed
+        Target -> Target : terminate
+        destroy Target
+        Assassin -> Family : prove termination(target)
+        Assassin -> Family : collect(price)
+        Family -> Continental : close(contract)
+        Continental -> Contract : archive
+        destroy Contract
+    end
+end
+deactivate Assassin
 ....
 
 == References
