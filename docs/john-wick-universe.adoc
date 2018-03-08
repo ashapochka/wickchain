@@ -99,6 +99,64 @@ deactivate Assassin
 ....
 endif::env-github[]
 
+== Operating Markers
+
+ifdef::env-github[image::diagrams/operating-markers.png[Operating Markers]]
+ifndef::env-github[]
+[plantuml, diagrams/operating-markers, png]
+....
+actor Assassin
+entity Marker
+actor Family
+control "The Continental Hotel" as Continental
+actor Target
+
+create Marker
+Assassin -> Marker : bloodprint
+Assassin -> Continental : register(marker)
+Assassin -> Family : issue(marker)
+Family -> Assassin : claim(marker, target)
+
+Assassin -> Assassin : search(target)
+
+alt target found
+    Assassin -> Target : execute
+    alt target executed
+        Target -> Target : terminate
+        destroy Target
+        Assassin -> Family : redeem(target)
+        Family -> Marker : bloodprint
+        Family -> Assassin : return(marker)
+        Continental -> Marker : archive
+        destroy Marker
+    end
+end
+....
+endif::env-github[]
+
+== Hosting Assassins in Continental
+
+ifdef::env-github[image::diagrams/continental-hosting.png[Hosting Assassins in the Continental Hotel]]
+ifndef::env-github[]
+[plantuml, diagrams/continental-hosting, png]
+....
+
+actor Assassin
+control Continental
+actor Barman
+actor Cleaner
+actor Sommelier
+actor Pawnbroker
+
+Assassin -> Continental : enter
+Assassin -> Barman: get a drink(one coin)
+Assassin -> Cleaner : dispose body(one coin)
+Assassin -> Sommelier: get a gun(one coin)
+Assassin -> Pawnbroker : access deposit box(account number)
+
+....
+endif::env-github[]
+
 == References
 
 - https://en.wikipedia.org/wiki/John_Wick_(film_series)[John Wick on Wikipedia]
